@@ -16,10 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from . import views
+from ExpenseLogging import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('add/', views.addExpense, name='addExpense'),
-    path('delete/', views.deleteExpense, name='deleteExpense')
+    path('delete/', views.deleteExpense, name='deleteExpense'),
+    path('expenselogs/', views.expenseLogs, name = 'expenseLogs')
 ]

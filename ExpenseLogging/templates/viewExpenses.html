@@ -1,0 +1,28 @@
+<html>
+
+    <body>
+        <h1>Expense Logs</h1>
+        <form action="/add/" method="post">
+            <input> 
+            <button type="submit">
+                Expense
+            </button>
+        </form>
+        <ul>
+            {% for expense in expenses %}
+            <li>
+                {{expense.description}}
+                {{expense.amount}}
+            </li>
+            {% empty %}
+            <li>
+                no items found
+            </li>
+            {% endfor %}
+            
+    
+        </ul>
+    </body>
+
+</html>
+

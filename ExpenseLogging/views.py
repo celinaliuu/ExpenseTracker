@@ -10,3 +10,7 @@ def addExpense(request):
 def deleteExpense(request, expenseid):
     expense = Expense.objects.get(id = expenseid)
     expense.delete()
+
+def expenseLogs(request):
+    expenses = Expense.objects.all()
+    return render(request, 'viewExpenses.html', {'expenses':expenses})
