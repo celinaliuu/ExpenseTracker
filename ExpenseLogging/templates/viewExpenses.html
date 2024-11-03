@@ -1,27 +1,54 @@
+{% load static tailwind_tags %}
 <html>
+    <head>
+        <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+        <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+        {% tailwind_css %}
+      </head>
+    <body class="bg-gray-50 min-h-screen flex flex-col items-center p-6">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">Expense Logs</h1>
+        <div class="w-full max-w-lg">
+            {% include "addExpense.html" %}
+        </div>
+        
 
-    <body>
-        <h1>Expense Logs</h1>
-        <form action="/add/" method="post">
-            <input> 
-            <button type="submit">
-                Expense
-            </button>
-        </form>
-        <ul>
-            {% for expense in expenses %}
-            <li>
-                {{expense.description}}
-                {{expense.amount}}
-            </li>
-            {% empty %}
-            <li>
-                no items found
-            </li>
-            {% endfor %}
+        <h2 class="text-2xl font-semibold text-gray-700 mt-8 mb-4"></h2class> Expense List </h2>
+
+        <div class="overflow-x-auto shadow-md rounded-lg w-full max-w-4xl">
+        <table class="min-w-full table-auto bg-white border border-gray-300">
+            <thead>
+                <tr class="bg-gray-100 text-left text-gray-700 uppercase text-sm leading-normal"></trclass>
+                    <th class="py-3 px-6">Description</th>
+                    <th class="py-3 px-6">Amount</th>
+                    <th class="py-3 px-6">Category</th>
+                    <th class="py-3 px-6">Date</th>
+                </tr>
+            </thead>
             
+            <tbody class="text-gray-600 text-sm font-light">
+                {% for expense in expenses %}
+                <tr>
+                    <td class="py-3 px-6">{{expense.description}}</td>
+                    <td class="py-3 px-6">{{expense.amount}}</td>
+                    <td class="py-3 px-6">{{expense.category}}</td>
+                    <td class="py-3 px-6">{{expense.date}}</td>
+                    <td> 
+                        <a href = "{% url 'updateView' expense.pk %}">
+                            <button> update</button>
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr class="border-b border-gray-200 text-center">
+                    <td colspan="4" class="py-4">No expenses found</td>
+                
+                </tr>
+                {% endfor %}
+            </tbody>
+            
+        </table>
+    </div>
     
-        </ul>
     </body>
 
 </html>

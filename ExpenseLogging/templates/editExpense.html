@@ -1,0 +1,18 @@
+{% load static tailwind_tags %}
+<html>
+    <head>
+        <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+        <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+        {% tailwind_css %}
+      </head>
+    <body class="bg-gray-50 min-h-screen flex flex-col items-center p-6">
+        
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">{{ expense.description }}</h1>
+        <div class="w-full max-w-lg bg-white shadow-md rounded-lg p-6 space-y-4">
+            {% include "updateExpenseForm.html" with expenseid=expense.pk %}
+        </div>
+    </body>
+
+
+</html>
+
