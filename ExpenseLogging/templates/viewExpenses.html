@@ -6,6 +6,9 @@
         {% tailwind_css %}
       </head>
     <body class="bg-gray-50 min-h-screen flex flex-col items-center p-6">
+        <a href = "{% url 'logout' %}">
+            Log Out
+        </a>
         <h1 class="text-3xl font-bold text-gray-800 mb-6">Expense Logs</h1>
         <div class="w-full max-w-lg">
             {% include "addExpense.html" %}

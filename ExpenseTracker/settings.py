@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "django_browser_reload.middleware.BrowserReloadMiddleware",
+    
 ]
 
 ROOT_URLCONF = 'ExpenseTracker.urls'
@@ -133,4 +134,8 @@ TAILWIND_APP_NAME = 'theme'
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+DEBUG = True
+
+LOGOUT_REDIRECT_URL = '/'
 

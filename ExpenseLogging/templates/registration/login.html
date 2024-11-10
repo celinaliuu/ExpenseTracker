@@ -1,0 +1,23 @@
+{% load static tailwind_tags %}
+
+<html>
+    <head>
+      
+    </head>
+    <body>
+        <form method = 'post'>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type = 'submit'>
+                Login
+            </button>
+        </form>
+        <a href = "{% url 'signUp' %}">
+            Sign Up Here
+        </a>
+    
+        
+    </body>
+
+</html>
+
