@@ -1,11 +1,11 @@
-
+{% load static tailwind_tags %}
 <form action="{% url 'updateExpense' expenseid %}" method="post" class="flex flex-col max-w-md w-full bg-white shadow-md rounded-lg p-6 space-y-4">
     {% csrf_token %}
 
     <div class="flex flex-col">
         <label for="description" class="mb-2 text-gray-700">Description:</label>
         <input 
-            type="text" 
+            type="text" value = "{{ expense.description }}"
             name="description" 
             class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-emerald-300" 
             required><br>
@@ -15,7 +15,7 @@
     <div class="flex flex-col">
         <label for="amount" class="mb-2 text-gray-700">Amount:</label>
         <input 
-            type="number" 
+            type="number" value = "{{ expense.amount }}"
             step="0.01" 
             name="amount" 
             class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-emerald-300" 
@@ -26,7 +26,7 @@
     <div class="flex flex-col">
         <label for="category" class="mb-2 text-gray-700">Category:</label>
         <input 
-            type="text" 
+            type="text" value = "{{ expense.category }}"
             name="category" 
             class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-emerald-300" 
             required><br>
@@ -35,23 +35,23 @@
 
     <div class="flex flex-col">
         <label for="date" class="mb-2 text-gray-700">Date:</label>
-        <input type="date" name="date" 
+        <input type="date" name="date" value = "{{ formatteddate }}"
         class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-emerald-300" 
         required><br>
     </div>
     
 
-    <div class="flex justify-between">
+    <div class="flex space-x-5">
         <button 
             type="submit" 
-            class="bg-red-300 text-gray-800 font-semibold py-2 px-4 rounded-md hover:bg-emerald-300 transition duration-300 ease-in-out">
+            class="bg-amber-300 text-gray-800 font-semibold py-2 px-4 rounded-md m-5 hover:bg-emerald-300 transition duration-300 ease-in-out">
             Update Expense
         </button>
 
         <a href="{% url 'deleteExpense' expenseid %}">
             <button 
                 type="button" 
-                class="bg-amber-300 text-gray-800 font-semibold py-2 px-4 rounded-md m-5 hover:bg-emerald-300 transition duration-300 ease-in-out">
+                class="bg-red-300 text-gray-800 font-semibold py-2 px-4 rounded-md m-5 hover:bg-emerald-300 transition duration-300 ease-in-out">
                 Delete Expense
             </button>
         </a>

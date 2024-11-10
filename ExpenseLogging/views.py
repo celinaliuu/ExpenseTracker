@@ -1,8 +1,31 @@
 from django.shortcuts import render, redirect
 from .models import Expense
-from .forms import ExpenseForm
+from .forms import ExpenseForm, SignUpForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, logout
+from django.contrib import messages
 
 # Create your views here.
+def customLogout(request):
+    logout(request)
+    return redirect('expenseLogs')
+
+def signUpView(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('expenseLogs')
+        else:
+            messages.error(request, 'sign up failed')
+
+    else:
+        form = SignUpForm()
+    return render(request, 'signUp.html', {'form': form})
+
+
+@login_required
 def addExpense(request):
     if request.method == 'POST':
         form = ExpenseForm(request.POST)
@@ -20,20 +43,25 @@ def addExpense(request):
             form = ExpenseForm() # empty form for GET requests
 
         return render(request, 'addExpense.html', {'form': form})
-
+    
+@login_required
 def deleteExpense(request, expenseid):
     expense = Expense.objects.get(id = expenseid)
     expense.delete()
     return redirect('expenseLogs') # redirect to the expense logs
 
+@login_required
 def expenseLogs(request):
     expenses = Expense.objects.all()
     return render(request, 'viewExpenses.html', {'expenses':expenses})
 
+@login_required
 def updateView(request, expenseid): 
     expense = Expense.objects.get(pk = expenseid)
-    return render(request, 'editExpense.html', {'expense':expense})
+    formatteddate = expense.date.strftime('%Y-%m-%d')
+    return render(request, 'editExpense.html', {'expense':expense, 'formatteddate' : formatteddate})
 
+@login_required
 def updateExpense(request, expenseid):
      expense = Expense.objects.get(pk = expenseid)
      if request.method == 'POST':

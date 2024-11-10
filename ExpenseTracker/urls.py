@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from ExpenseLogging import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,4 +27,8 @@ urlpatterns = [
     path("__reload__/", include("django_browser_reload.urls")),
     path('<int:expenseid>/', views.updateView, name = 'updateView'),
     path('<int:expenseid>/update/', views.updateExpense, name = 'updateExpense'),
+    path('accounts/login/', auth_views.LoginView.as_view(), name = 'login'),
+    path('signup/', views.signUpView, name = 'signUp'),
+    path('logout/', views.customLogout, name = "logout"),
+
 ]
