@@ -2,20 +2,24 @@
 
 <html>
     <head>
-      
+        <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+        <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+        {% tailwind_css %}
     </head>
-    <body>
-        <form method = 'post'>
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type = 'submit'>
-                Login
-            </button>
-        </form>
-        <a href = "{% url 'signUp' %}">
-            Sign Up Here
-        </a>
-    
+    <body class="flex items-center justify-center min-h-screen bg-gray-100">
+        <div class="w-full max-w-md bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-semibold mb-6 text-center">Login</h2>
+            <form method='post' class="space-y-4">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type = 'submit' class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+                    Login
+                </button>
+            </form>
+            <a href = "{% url 'signUp' %}" class="text-blue-500 hover:underline">
+                Sign Up Here
+            </a>
+        </div>
         
     </body>
 

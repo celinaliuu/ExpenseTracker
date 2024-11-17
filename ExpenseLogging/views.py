@@ -27,6 +27,7 @@ def signUpView(request):
 
 @login_required
 def addExpense(request):
+    user = request.user
     if request.method == 'POST':
         form = ExpenseForm(request.POST)
         # Expense.objects.create(expense)
@@ -36,7 +37,7 @@ def addExpense(request):
             date = form.cleaned_data['date']
             description = form.cleaned_data['description']
 
-            Expense.objects.create(amount=amount, category=category, date=date, description=description)
+            Expense.objects.create(amount=amount, category=category, date=date, description=description, user=user)
 
             return redirect('expenseLogs') # redirect to the expense logs
         else:
@@ -52,7 +53,8 @@ def deleteExpense(request, expenseid):
 
 @login_required
 def expenseLogs(request):
-    expenses = Expense.objects.all()
+    user = request.user
+    expenses = Expense.objects.filter(user=user).values()
     return render(request, 'viewExpenses.html', {'expenses':expenses})
 
 @login_required
