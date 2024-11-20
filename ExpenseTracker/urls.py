@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('expenselogs/add/', views.addExpense, name='addExpense'),
     path('<int:expenseid>/delete/', views.deleteExpense, name='deleteExpense'),
-    path('expenselogs/', views.expenseLogs, name = 'expenseLogs', include('django_plotly_dash.urls')),
+    path('expenselogs/', views.expenseLogs, name = 'expenseLogs'),
     path("__reload__/", include("django_browser_reload.urls")),
     path('<int:expenseid>/', views.updateView, name = 'updateView'),
     path('<int:expenseid>/update/', views.updateExpense, name = 'updateExpense'),

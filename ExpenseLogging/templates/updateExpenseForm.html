@@ -2,6 +2,17 @@
 <form action="{% url 'updateExpense' expenseid %}" method="post" class="flex flex-col max-w-md w-full bg-white shadow-md rounded-lg p-6 space-y-4">
     {% csrf_token %}
 
+
+    <div class="flex flex-col">
+        <label for="category" class="mb-2 text-gray-700">Category:</label>
+        <input 
+            type="text" value = "{{ expense.category }}"
+            name="category" 
+            class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-emerald-300" 
+            required><br>
+    </div>
+
+    
     <div class="flex flex-col">
         <label for="description" class="mb-2 text-gray-700">Description:</label>
         <input 
@@ -22,15 +33,6 @@
             required><br>
     </div>
     
-
-    <div class="flex flex-col">
-        <label for="category" class="mb-2 text-gray-700">Category:</label>
-        <input 
-            type="text" value = "{{ expense.category }}"
-            name="category" 
-            class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-emerald-300" 
-            required><br>
-    </div>
     
 
     <div class="flex flex-col">
