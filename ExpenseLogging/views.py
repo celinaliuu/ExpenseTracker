@@ -44,6 +44,8 @@ def addExpense(request):
             form = ExpenseForm() # empty form for GET requests
 
         return render(request, 'addExpense.html', {'form': form})
+        # expenses = Expense.objects.filter(user=user)
+        # return render(request, 'viewExpenses.html', {'form': form, 'expenses': expenses})
     
 @login_required
 def deleteExpense(request, expenseid):
@@ -62,6 +64,11 @@ def updateView(request, expenseid):
     expense = Expense.objects.get(pk = expenseid)
     formatteddate = expense.date.strftime('%Y-%m-%d')
     return render(request, 'editExpense.html', {'expense':expense, 'formatteddate' : formatteddate})
+
+# def addExpenseView(request):
+#     if request.method == "POST":
+#         pass
+#     return render(request, 'addExpense.html')
 
 @login_required
 def updateExpense(request, expenseid):
