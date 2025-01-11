@@ -1,0 +1,87 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Visualization</title>
+    {% tailwind_css %}
+</head>
+<body class="bg-gray-100">
+
+    <!-- Header with Navbar -->
+    <header class="bg-gradient-to-r from-indigo-200 via-indigo-200 to-indigo-200 w-full py-6 text-white mb-8">
+        <div class="max-w-7xl mx-auto flex justify-between items-center px-8">
+            <!-- Navigation Bar -->
+            <nav class="space-x-6">
+                <a href="{% url 'expenseLogs' %}" class="text-lg font-semibold text-gray-800 hover:text-white transition-colors duration-300">
+                    Home
+                </a>
+                <a href="{% url 'expenseVisualization' %}" class="text-lg font-semibold text-gray-800 hover:text-white transition-colors duration-300">
+                    View Visualization
+                </a>
+                <a href="{% url 'addExpense' %}" class="text-lg font-semibold text-gray-800 hover:text-white transition-colors duration-300">
+                    Add New Expense
+                </a>
+                <a href="{% url 'logout' %}" class="text-lg font-semibold text-gray-800 hover:text-white transition-colors duration-300">
+                    Log Out
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="bg-white shadow-md rounded-lg">
+            <div class="bg-indigo-600 text-white p-6 rounded-t-lg">
+                <h2 class="text-2xl font-bold">Expense Visualization</h2>
+            </div>
+            <div class="p-6">
+                <h1 class="text-3xl font-semibold text-center text-indigo-600 mb-8">Expenses by Category</h1>
+                <div class="chart-container max-w-full h-96">
+                    <canvas id="expenseChart" width="400" height="200"></canvas>
+                </div>
+                <br>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart.js JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        // Fetching JSON data from the backend
+        fetch('/expense-chart-data/')
+            .then(response => response.json())
+            .then(data => {
+                // Create the chart using Chart.js
+                const ctx = document.getElementById('expenseChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar', // Chart type: bar, pie, line, etc.
+                    data: {
+                        labels: data.labels, // Categories
+                        datasets: [{
+                            label: 'Expenses by Category',
+                            data: data.data, // Amounts
+                            backgroundColor: [
+                                'rgba(75, 192, 192, 0.2)', // Customize colors
+                            ],
+                            borderColor: [
+                                'rgba(75, 192, 192, 1)',
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true // Start the y-axis at zero
+                            }
+                        }
+                    }
+                });
+            });
+    </script>
+
+</body>
+</html>

@@ -30,5 +30,9 @@ urlpatterns = [
     path('accounts/login/', auth_views.LoginView.as_view(), name = 'login'),
     path('signup/', views.signUpView, name = 'signUp'),
     path('logout/', views.customLogout, name = "logout"),
+    path('visualization/', views.expenseVisualization, name='visualization'),
+    path('expense-chart-data/', views.expenseChartData, name='expense-chart-data'),
+    path('visualization/', views.expenseVisualization, name='expenseVisualization'),
+    
 
 ]

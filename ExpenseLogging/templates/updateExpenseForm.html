@@ -1,5 +1,6 @@
 {% load static tailwind_tags %}
-<form action="{% url 'updateExpense' expenseid %}" method="post" class="flex flex-col max-w-md w-full bg-white shadow-md rounded-lg p-6 space-y-4">
+
+<form action="{% url 'updateExpense' expenseid %}" method="post">
     {% csrf_token %}
 
 
@@ -46,7 +47,7 @@
     <div class="flex space-x-5">
         <button 
             type="submit" 
-            class="bg-amber-300 text-gray-800 font-semibold py-2 px-4 rounded-md m-5 hover:bg-emerald-300 transition duration-300 ease-in-out">
+            class="bg-amber-300 text-gray-800 font-semibold py-2 px-4 rounded-md m-5 hover:bg-indigo-400 transition duration-300 ease-in-out">
             Update Expense
         </button>
 
